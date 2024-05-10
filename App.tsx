@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
+
 import { MaterialIcons } from '@expo/vector-icons';
 import { StyleSheet, View, Image, TextInput, TouchableOpacity, Text, Alert, KeyboardAvoidingView, Platform, Keyboard, Dimensions } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
+
+
 
 const { height } = Dimensions.get('window');
 
 export default function App() {
   const [description, setDescription] = useState('Descripción');
   const [editMode, setEditMode] = useState(false);
-  const [backgroundImageUri, setBackgroundImageUri] = useState(require('./assets/background.jpeg'));
+  const [backgroundImageUri, setBackgroundImageUri] = useState(require('./assets/background.png'));
   const [profileImageUri, setProfileImageUri] = useState(require('./assets/chef.jpeg'));
   const [personName, setPersonName] = useState('Nombre de la persona');
   const [phoneNumber, setPhoneNumber] = useState('123456789'); 
@@ -97,6 +100,7 @@ export default function App() {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined} enabled>
+      
       <View style={styles.backgroundContainer}>
         <Image
           source={backgroundImageUri}
@@ -109,7 +113,7 @@ export default function App() {
           style={styles.profileImage}
         />
         <View style={styles.profileNameContainer}>
-          <MaterialIcons name="person" size={24} color="white" style={styles.icon} />
+       
           <Text style={styles.profileName}>{personName}</Text>
         </View>
       </TouchableOpacity>
@@ -119,7 +123,10 @@ export default function App() {
       <View style={styles.form}>
         <Text style={styles.formTitle}>Perfil</Text>
         <View style={styles.inputContainer}>
-          <MaterialIcons name="person" size={24} color="black" style={styles.icon} />
+        <Image
+            source={{ uri: "https://i.pinimg.com/236x/eb/26/db/eb26db4e1e95322eca0e636d5187cc31.jpg" }}
+            style={styles.socialIcon}
+          />
           <TextInput
             style={styles.input}
             placeholder="Nombre"
@@ -129,7 +136,10 @@ export default function App() {
           />
         </View>
         <View style={styles.inputContainer}>
-          <MaterialIcons name="description" size={24} color="black" style={styles.icon} />
+        <Image
+            source={{ uri: "https://i.pinimg.com/236x/4d/00/8b/4d008b130bfc3d54968c88e9cf93c53b.jpg" }}
+            style={styles.socialIcon}
+          />
           <TextInput
             style={styles.input}
             placeholder="Descripción"
@@ -140,7 +150,10 @@ export default function App() {
           />
         </View>
         <View style={styles.inputContainer}>
-          <MaterialIcons name="phone" size={24} color="black" style={styles.icon} />
+        <Image
+            source={{ uri: "https://i.pinimg.com/236x/da/d2/9b/dad29b5b6763ed2b27421910b1b39748.jpg" }}
+            style={styles.socialIcon}
+          />
           <TextInput
             style={styles.input}
             placeholder="Teléfono"
@@ -150,7 +163,10 @@ export default function App() {
           />
         </View>
         <View style={styles.inputContainer}>
-          <MaterialIcons name="email" size={24} color="black" style={styles.icon} />
+        <Image
+            source={{ uri: "https://i.pinimg.com/236x/f0/f6/58/f0f658ffaba2814e227003c9f1c004e9.jpg" }}
+            style={styles.socialIcon}
+          />
           <TextInput
             style={styles.input}
             placeholder="Correo Electrónico"
@@ -162,7 +178,7 @@ export default function App() {
         </View>
         <View style={styles.inputContainer}>
           <Image
-            source={{ uri: "https://i.pinimg.com/564x/d9/e6/77/d9e677d2a71a45536825168bde8e570d.jpg" }}
+            source={{ uri: "https://i.pinimg.com/236x/47/3b/be/473bbe699bf984150689eb586d448c0b.jpg" }}
             style={styles.socialIcon}
           />
           <TextInput
@@ -175,7 +191,7 @@ export default function App() {
         </View>
         <View style={styles.inputContainer}>
         <Image
-            source={{ uri: "https://i.pinimg.com/564x/2e/9e/63/2e9e63b534a6cef06f94eaf11d89ba86.jpg" }}
+            source={{ uri: "https://www.flaticon.es/icono-gratis/viber_152851?related_id=226277&origin=search" }}
             style={styles.socialIcon}
           />
           <TextInput
@@ -203,19 +219,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  optionsButton: {
+  optionsButton: { // los 3 puntos que sirven para editar 
     position: 'absolute',
     top: 40,
     right: 20,
     zIndex: 1,
   },
-  profileContainer: {
+  profileContainer: { // imagen 
     position: 'absolute',
-    top: 100,
+    top: 50,
     left: 100,
     alignItems: 'center',
   },
-  profileImage: {
+  profileImage: { // imagen 
     width: 200,
     height: 200,
     borderRadius: 100,
@@ -224,11 +240,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  profileName: {
-    color: 'white',
+  profileName: { //Nombre del fotografo 
+    color: 'black',
     marginTop: 10,
+    fontSize: 18,
   },
-  backgroundContainer: {
+  backgroundContainer: {  // imagen del fondo 
     position: 'absolute',
     width: '100%',
     height: '100%',
@@ -236,9 +253,9 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
   },
-  form: {
-    width: '90%',
-    height: '45%',
+  form: { // contenedor 
+    width: '80%',
+    height: '55%',
     backgroundColor: 'white',
     padding: 20,
     borderTopLeftRadius: 40,
@@ -246,18 +263,18 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
     position: 'absolute',
-    bottom: 80,
+    bottom: 50,
   },
   formTitle: {
-    fontSize: 20,
+    fontSize: 20, // perfil 
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 20, // espacio estre el perfil y el Nombre 
     textAlign: 'center',
   },
   inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 10,
+    marginBottom: 30,// espacios entre Nombre, descripcion etc 
   },
   label: {
     fontSize: 16,
@@ -265,32 +282,32 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   input: {
-    flex: 1,
-    fontSize: 16,
+    flex: 0.8, // largo de la linea 
+    fontSize: 16, //letra 
     color: 'black',
-    borderBottomWidth: 1,
+    borderBottomWidth: 1, // grosor de las lineas 
     borderBottomColor: 'gray',
-    paddingBottom: 0.1,
-    marginLeft: 10,
+    paddingBottom: 0.2,
+    marginLeft: 1, // ancho entre los iconos y las lineas 
   },
   saveButton: {
-    alignSelf: 'flex-end',
-    marginTop: 10,
-    paddingVertical: 8,
+    alignSelf: 'center', // Alinea el botón al centro horizontalmente
+    backgroundColor: 'orange', // Solo un color de ejemplo, puedes ajustarlo según sea necesario
+    paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: 'orange',
-    borderRadius: 20,
+    borderRadius: 5,
+    marginTop: 20, // Agrega un poco de margen desde el campo de entrada anterior
   },
+  
   saveButtonText: {
     color: 'white',
     fontWeight: 'bold',
   },
-  icon: {
-    marginRight: 10,
-  },
-  socialIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 10,
+  
+  socialIcon: { //iconos
+    width: 25,
+    height: 25,
+    marginRight: 15,
+    marginLeft: 30,
   },
 });
