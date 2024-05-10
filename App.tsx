@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 import { MaterialIcons } from '@expo/vector-icons';
-import { StyleSheet, View, Image, TextInput, TouchableOpacity, Text, Alert, KeyboardAvoidingView, Platform, Keyboard, Dimensions } from 'react-native';
+import { StyleSheet, View, Image, TextInput, TouchableOpacity, Text, Alert, KeyboardAvoidingView, Platform, Keyboard, Dimensions ,ScrollView} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 
 
@@ -20,6 +20,9 @@ export default function App() {
   const [twitter, setTwitter] = useState('');
   const [email, setEmail] = useState('');
   const [formPersonName, setFormPersonName] = useState('');
+
+  const keyboardVerticalOffset = Platform.OS === 'ios' ? 60 : 0;
+
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -99,7 +102,12 @@ export default function App() {
   };
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined} enabled>
+    <KeyboardAvoidingView 
+    style={styles.container}
+    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}  // Adjust behavior based on platform
+    keyboardVerticalOffset={Platform.OS === 'ios' ? 64 : 0} // You may need to adjust this value
+    enabled
+  >
       
       <View style={styles.backgroundContainer}>
         <Image
@@ -121,6 +129,7 @@ export default function App() {
         <MaterialIcons name="more-vert" size={24} color="white" />
       </TouchableOpacity>
       <View style={styles.form}>
+      <ScrollView>
         <Text style={styles.formTitle}>Perfil</Text>
         <View style={styles.inputContainer}>
         <Image
@@ -207,6 +216,8 @@ export default function App() {
             <Text style={styles.saveButtonText}>Guardar</Text>
           </TouchableOpacity>
         )}
+      </ScrollView>
+        
       </View>
     </KeyboardAvoidingView>
   );
